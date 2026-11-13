@@ -1,0 +1,261 @@
+.profiles-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 1rem;
+  background: radial-gradient(circle at top, #1b1d29 0%, #0b0c10 70%);
+}
+
+.profiles-container {
+  text-align: center;
+  max-width: 920px;
+}
+
+.plan-pill {
+  display: inline-block;
+  background: rgba(229, 9, 20, 0.15);
+  border: 1px solid rgba(229, 9, 20, 0.45);
+  color: #ff8b92;
+  padding: 0.3rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.profiles-header-info h1 {
+  font-size: clamp(2rem, 4vw, 3.1rem);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.profiles-header-info p {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.profiles-alert {
+  max-width: 520px;
+  margin: 0 auto 1.5rem;
+  padding: 0.8rem 1rem;
+  background: rgba(229, 9, 20, 0.18);
+  border: 1px solid var(--brand-red);
+  border-radius: var(--radius-sm);
+  color: #ffa5aa;
+}
+
+.profiles-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 2.2rem;
+}
+
+.profile-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 155px;
+  cursor: pointer;
+  transition: transform var(--transition-fast);
+}
+
+.profile-tile:hover {
+  transform: translateY(-6px);
+}
+
+.profile-avatar {
+  width: 140px;
+  height: 140px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border: 3px solid transparent;
+  box-shadow: var(--shadow-card);
+  transition: border-color var(--transition-fast);
+}
+
+.profile-tile:hover .profile-avatar,
+.profile-tile.active-tile .profile-avatar {
+  border-color: #ffffff;
+}
+
+.profile-emoji {
+  font-size: 3.6rem;
+}
+
+.kids-ribbon {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background: #04151f;
+  color: var(--accent-kids);
+  font-size: 0.68rem;
+  font-weight: 800;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  letter-spacing: 0.06em;
+}
+
+.profile-delete-btn {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--brand-red);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.85rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.profile-tile-name {
+  margin-top: 0.85rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.profile-tile-meta {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+  margin-top: 0.2rem;
+}
+
+.add-avatar {
+  background: rgba(255, 255, 255, 0.06);
+  border: 2px dashed var(--border-strong);
+  font-size: 3rem;
+  color: var(--text-secondary);
+}
+
+.plan-limit-note {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: 1.8rem;
+}
+
+.plan-limit-note a {
+  color: var(--brand-red);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.profiles-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.78);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  padding: 1rem;
+}
+
+.modal-card {
+  width: 100%;
+  max-width: 460px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  padding: 2rem;
+  text-align: left;
+  box-shadow: var(--shadow-lg);
+}
+
+.modal-card h2 {
+  font-size: 1.45rem;
+  margin-bottom: 0.35rem;
+}
+
+.modal-sub {
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+  margin-bottom: 1.4rem;
+}
+
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.swatch-row,
+.icon-row {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.color-swatch {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+}
+
+.color-swatch.selected {
+  border-color: #ffffff;
+  transform: scale(1.1);
+}
+
+.icon-choice {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  font-size: 1.3rem;
+}
+
+.icon-choice.selected {
+  border-color: var(--brand-red);
+  background: var(--brand-red-soft);
+}
+
+.kids-checkbox-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  background: var(--bg-elevated);
+  padding: 0.85rem 1rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+.kids-checkbox-row input {
+  margin-top: 0.25rem;
+  transform: scale(1.2);
+}
+
+.kids-checkbox-row strong {
+  display: block;
+  font-size: 0.92rem;
+}
+
+.kids-checkbox-row span {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.modal-btns {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
