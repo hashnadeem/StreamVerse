@@ -1,0 +1,331 @@
+.details-hero {
+  position: relative;
+  background-size: cover;
+  background-position: center 20%;
+  padding: calc(var(--nav-height) + 3rem) 0 3.5rem;
+}
+
+.details-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+      90deg,
+      rgba(11, 12, 16, 0.96) 0%,
+      rgba(11, 12, 16, 0.85) 60%,
+      rgba(11, 12, 16, 0.55) 100%
+    ),
+    linear-gradient(180deg, rgba(11, 12, 16, 0.3) 0%, #0b0c10 100%);
+}
+
+.details-hero-inner {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.details-poster-thumb {
+  width: 100%;
+  height: 375px;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border-strong);
+}
+
+.details-badges-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: 0.75rem;
+}
+
+.details-rating-star {
+  color: var(--accent-gold);
+  font-weight: 700;
+  margin-left: 0.4rem;
+}
+
+.details-main-info h1 {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 800;
+  margin-bottom: 0.85rem;
+}
+
+.details-synopsis {
+  font-size: 1.02rem;
+  color: #dcdfe9;
+  max-width: 720px;
+  margin-bottom: 1.5rem;
+}
+
+.details-credits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.1rem;
+  padding: 1.1rem 0;
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+  margin-bottom: 1.6rem;
+}
+
+.credit-label {
+  display: block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin-bottom: 0.2rem;
+}
+
+.details-credits-grid p {
+  font-size: 0.92rem;
+  font-weight: 500;
+}
+
+.details-cta-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+}
+
+.details-body-sections {
+  padding-top: 2rem;
+  padding-bottom: 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+/* Episodes Section */
+.episodes-section {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.75rem;
+}
+
+.episodes-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.35rem;
+}
+
+.episodes-header p {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+}
+
+.season-selector {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  padding: 0.55rem 1rem;
+  font-weight: 600;
+}
+
+.episodes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.episode-row-card {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1rem 1.2rem;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: border-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.episode-row-card:hover {
+  border-color: var(--brand-red);
+  transform: translateX(4px);
+}
+
+.episode-number-badge {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(229, 9, 20, 0.16);
+  color: #ff8b92;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.episode-info {
+  flex: 1;
+}
+
+.episode-title-line {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.25rem;
+}
+
+.episode-duration {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.episode-info p {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+}
+
+/* Reviews Section */
+.reviews-section {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.85rem;
+}
+
+.reviews-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.25fr;
+  gap: 2.2rem;
+}
+
+.review-sub {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  margin: 0.25rem 0 1.1rem;
+}
+
+.review-success-banner {
+  background: rgba(70, 211, 105, 0.15);
+  border: 1px solid var(--accent-green);
+  color: var(--accent-green);
+  padding: 0.65rem 0.9rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.review-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.star-picker-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.star-buttons {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.star-btn {
+  font-size: 1.5rem;
+  color: var(--text-muted);
+}
+
+.star-btn.filled {
+  color: var(--accent-gold);
+}
+
+.rating-numeric {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.review-form textarea {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 0.85rem;
+  font-size: 0.92rem;
+  outline: none;
+}
+
+.reviews-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  margin-top: 1rem;
+}
+
+.review-card {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 1rem 1.15rem;
+}
+
+.review-card-top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.4rem;
+}
+
+.review-stars {
+  color: var(--accent-gold);
+  letter-spacing: 0.05em;
+}
+
+.review-comment {
+  font-size: 0.9rem;
+  color: #dcdfe9;
+  margin-bottom: 0.45rem;
+}
+
+.review-date {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.trailer-modal-card {
+  width: min(860px, 95vw);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+}
+
+.trailer-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.9rem;
+}
+
+.trailer-video-element {
+  width: 100%;
+  border-radius: var(--radius-sm);
+  max-height: 70vh;
+  background: #000;
+}
+
+@media (max-width: 820px) {
+  .details-hero-inner {
+    grid-template-columns: 1fr;
+  }
+  .details-poster-thumb {
+    width: 200px;
+    height: 290px;
+  }
+  .reviews-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
