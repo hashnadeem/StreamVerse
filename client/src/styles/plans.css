@@ -1,0 +1,144 @@
+.plans-header {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 2.5rem;
+}
+
+.plans-header h1 {
+  font-size: clamp(1.9rem, 3.8vw, 2.8rem);
+  margin-bottom: 0.6rem;
+}
+
+.plans-header p {
+  color: var(--text-secondary);
+}
+
+.plan-confirmation-banner {
+  max-width: 720px;
+  margin: 0 auto 2rem;
+  background: rgba(70, 211, 105, 0.16);
+  border: 1px solid var(--accent-green);
+  color: var(--accent-green);
+  padding: 0.9rem 1.25rem;
+  border-radius: var(--radius-md);
+  text-align: center;
+  font-weight: 600;
+}
+
+.plans-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.75rem;
+}
+
+.plan-card {
+  position: relative;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 2rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-card);
+}
+
+.plan-card.popular-plan {
+  background: linear-gradient(180deg, rgba(229, 9, 20, 0.1) 0%, var(--bg-secondary) 35%);
+  border-color: rgba(229, 9, 20, 0.45);
+}
+
+.plan-card.current-plan-border {
+  border-color: var(--accent-green);
+}
+
+.popular-ribbon {
+  position: absolute;
+  top: -12px;
+  right: 20px;
+  background: var(--brand-red);
+  color: #ffffff;
+  font-size: 0.7rem;
+  font-weight: 800;
+  padding: 0.22rem 0.65rem;
+  border-radius: 999px;
+  letter-spacing: 0.06em;
+}
+
+.plan-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.plan-card-head h2 {
+  font-size: 1.55rem;
+}
+
+.plan-quality-tag {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-strong);
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
+.plan-price {
+  display: flex;
+  align-items: baseline;
+  gap: 0.3rem;
+  margin-bottom: 1.5rem;
+}
+
+.plan-price .currency {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.plan-price .amount {
+  font-size: 2.5rem;
+  font-weight: 800;
+}
+
+.plan-price .period {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.plan-specs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  padding: 1rem 0;
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+  margin-bottom: 1.25rem;
+}
+
+.plan-specs div {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.86rem;
+}
+
+.plan-specs span {
+  color: var(--text-secondary);
+}
+
+.plan-features-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  font-size: 0.88rem;
+  color: #dcdfe9;
+  margin-bottom: 1.8rem;
+  flex: 1;
+}
+
+.plan-cta-btn {
+  width: 100%;
+  padding: 0.85rem;
+}
+
