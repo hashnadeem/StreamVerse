@@ -39,6 +39,7 @@ const WatchPage = () => {
   const [muted, setMuted] = useState(false);
   const [playbackRate, setPlaybackRate] = useState(1);
   const [showEpisodeDrawer, setShowEpisodeDrawer] = useState(false);
+  const [streamMode, setStreamMode] = useState('range'); // 'range' | 'cdn'
 
   useEffect(() => {
     if (item) {
@@ -73,7 +74,11 @@ const WatchPage = () => {
     );
   }
 
-  const streamSource = activeEpisode ? activeEpisode.videoUrl : item.videoUrl;
+  const rawSource = activeEpisode ? activeEpisode.videoUrl : item.videoUrl;
+  const streamSource =
+    streamMode === 'range' && rawSource
+      ? `/api/catalog/stream?videoPath=${encodeURIComponent(rawSource)}`
+      : rawSource;
 
   const togglePlay = () => {
     if (!videoRef.current) return;
@@ -182,6 +187,19 @@ const WatchPage = () => {
         </div>
 
         <div className="player-quality-pills">
+          <button
+            type="button"
+            className="btn btn-outline btn-sm"
+            onClick={() => setStreamMode((prev) => (prev === 'range' ? 'cdn' : 'range'))}
+            title="Toggle between Express HTTP 206 Range Stream and Direct CDN Stream"
+            style={{
+              borderColor: streamMode === 'range' ? 'var(--brand-red)' : 'var(--border-subtle)',
+              color: streamMode === 'range' ? '#ffffff' : 'var(--text-secondary)',
+              background: streamMode === 'range' ? 'var(--brand-red-soft)' : 'transparent',
+            }}
+          >
+            {streamMode === 'range' ? '⚡ Express HTTP Range (206)' : '🌐 CDN Stream'}
+          </button>
           <span className="badge badge-hd">
             {currentPlanDetails.resolutionBadge}
           </span>

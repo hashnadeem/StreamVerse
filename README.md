@@ -67,7 +67,9 @@ StreamVerse/
     ├── controllers/            # Auth, Catalogue & HTTP Range Streaming controllers
     ├── middleware/             # JWT verification & Admin guard middleware
     ├── models/                 # User, Title, and Review Mongoose schemas
-    ├── routes/                 # Express API routers
+    ├── routes/                 # Express API routers (auth, catalog, upload)
+    ├── uploads/                # Multer storage directory for posters & video files
+    ├── seed.js                 # Complete MongoDB seeding script
     └── server.js
 ```
 
@@ -83,11 +85,12 @@ npm run dev
 ```
 Open `http://localhost:5173` in your browser.
 
-### 2. Start the Express Backend Server (Optional / Deliverable 2 API)
+### 2. Start the Express Backend Server & Multer Upload API
 ```bash
 cd server
 npm install
-npm run dev
+npm run seed      # Populates local MongoDB with users, catalogue & reviews
+npm run dev       # Starts REST API & Range-streaming server on port 5000
 ```
-The API server listens on `http://localhost:5000`.
+The API server listens on `http://localhost:5000` with static uploads served at `http://localhost:5000/uploads`.
 
