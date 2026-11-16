@@ -99,3 +99,165 @@ export const loginUser = async (req, res) => {
   }
 };
 
+export const getCurrentUser = async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select('-passwordHash');
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({ message: 'Failed to fetch user', error: error.message });
+  }
+};
+
+export const getAllUsers = async (_req, res) => {
+  try {
+    const users = await User.find().select('-passwordHash').sort({ createdAt: -1 });
+    res.json(users);
+  } catch (error) {
+    res.status(500).json({ message: 'Failed to fetch users', error: error.message });
+  }
+};
+
+export const updateUserRole = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = await User.findById(id);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    user.role = user.role === 'admin' ? 'user' : 'admin';
+    await user.save();
+    res.json({ id: user._id, role: user.role, message: `Role updated to ${user.role}` });
+  } catch (error) {
+    res.status(500).json({ message: 'Failed to update user role', error: error.message });
+  }
+};
+
+export const addProfile = async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    if (user.profiles.length >= 4) {
+      return res.status(400).json({ message: 'Maximum 4 profiles reached for this account.' });
+    }
+
+    const { name, avatarColor, avatarIcon, isKids } = req.body;
+    const newProfile = {
+      name: name.trim(),
+      avatarColor: avatarColor || '#e50914',
+      avatarIcon: avatarIcon || (isKids ? '🌟' : '🎬'),
+      isKids: Boolean(isKids),
+      myList: [],
+      continueWatching: [],
+    };
+
+    user.profiles.push(newProfile);
+    await user.save();
+    res.status(201).json(user.profiles);
+  } catch (error) {
+    res.status(400).json({ message: 'Failed to add profile', error: error.message });
+  }
+};
+
+export const deleteProfile = async (req, res) => {
+  try {
+    const { profileId } = req.params;
+    const user = await User.findById(req.user.id);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    if (user.profiles.length <= 1) {
+      return res.status(400).json({ message: 'Accounts must keep at least 1 viewing profile.' });
+    }
+
+    user.profiles = user.profiles.filter((p) => String(p._id) !== profileId);
+    await user.save();
+    res.json(user.profiles);
+  } catch (error) {
+    res.status(500).json({ message: 'Failed to delete profile', error: error.message });
+  }
+};
+
+export const toggleWatchlist = async (req, res) => {
+  try {
+    const { profileId, titleId } = req.body;
+    const user = await User.findById(req.user.id);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const profile = user.profiles.id(profileId) || user.profiles[0];
+    if (!profile) {
+      return res.status(404).json({ message: 'Profile not found' });
+    }
+
+    const exists = profile.myList.includes(titleId);
+    if (exists) {
+      profile.myList = profile.myList.filter((id) => id !== titleId);
+    } else {
+      profile.myList.push(titleId);
+    }
+
+    await user.save();
+    res.json({ myList: profile.myList, added: !exists });
+  } catch (error) {
+    res.status(500).json({ message: 'Failed to toggle watchlist in MongoDB', error: error.message });
+  }
+};
+
+export const saveWatchProgress = async (req, res) => {
+  try {
+    const { profileId, titleId, episodeId, progressSeconds, durationSeconds } = req.body;
+    const user = await User.findById(req.user.id);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const profile = user.profiles.id(profileId) || user.profiles[0];
+    if (!profile) {
+      return res.status(404).json({ message: 'Profile not found' });
+    }
+
+    profile.continueWatching = profile.continueWatching.filter(
+      (item) => item.titleId !== titleId
+    );
+    profile.continueWatching.unshift({
+      titleId,
+      episodeId: episodeId || null,
+      progressSeconds: Math.round(progressSeconds || 0),
+      durationSeconds: Math.round(durationSeconds || 100),
+      updatedAt: new Date(),
+    });
+
+    await user.save();
+    res.json(profile.continueWatching);
+  } catch (error) {
+    res.status(500).json({ message: 'Failed to save progress in MongoDB', error: error.message });
+  }
+};
+
+export const updateSubscription = async (req, res) => {
+  try {
+    const { planId } = req.body;
+    if (!['basic', 'standard', 'premium'].includes(planId)) {
+      return res.status(400).json({ message: 'Invalid subscription plan ID' });
+    }
+
+    const user = await User.findByIdAndUpdate(
+      req.user.id,
+      { subscriptionPlan: planId },
+      { new: true }
+    ).select('-passwordHash');
+
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({ message: 'Failed to update subscription', error: error.message });
+  }
+};
