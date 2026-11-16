@@ -192,6 +192,18 @@ export const StreamProvider = ({ children }) => {
     );
   };
 
+  const deleteEpisodeFromSeries = (seriesId, episodeId) => {
+    setTitles((prev) =>
+      prev.map((t) => {
+        if (t.id !== seriesId) return t;
+        return {
+          ...t,
+          episodes: (t.episodes || []).filter((ep) => ep.id !== episodeId),
+        };
+      })
+    );
+  };
+
   return (
     <StreamContext.Provider
       value={{
@@ -206,6 +218,7 @@ export const StreamProvider = ({ children }) => {
         updateTitle,
         deleteTitle,
         addEpisodeToSeries,
+        deleteEpisodeFromSeries,
       }}
     >
       {children}

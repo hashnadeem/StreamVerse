@@ -29,6 +29,7 @@ const AdminDashboard = () => {
     updateTitle,
     deleteTitle,
     addEpisodeToSeries,
+    deleteEpisodeFromSeries,
   } = useStream();
 
   const [activeTab, setActiveTab] = useState('catalog');
@@ -44,6 +45,11 @@ const AdminDashboard = () => {
     videoUrl: '',
   });
   const [feedback, setFeedback] = useState('');
+  const [uploadStatus, setUploadStatus] = useState({
+    poster: '',
+    video: '',
+    epVideo: '',
+  });
 
   const totalViews = titles.reduce((acc, t) => acc + (t.viewsCount || 0), 0);
   const mostWatched = [...titles].sort(
@@ -53,6 +59,68 @@ const AdminDashboard = () => {
   const notify = (msg) => {
     setFeedback(msg);
     setTimeout(() => setFeedback(''), 3500);
+  };
+
+  const handleFileUpload = async (file, type) => {
+    if (!file) return;
+    const formData = new FormData();
+    formData.append(type === 'video' || type === 'epVideo' ? 'video' : 'poster', file);
+
+    setUploadStatus((prev) => ({ ...prev, [type]: 'Uploading via Multer...' }));
+
+    try {
+      const endpoint =
+        type === 'video' || type === 'epVideo'
+          ? '/api/upload/video'
+          : '/api/upload/poster';
+      const token = localStorage.getItem('streamverse_token');
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        headers: token ? { Authorization: `Bearer ${token}` } : {},
+        body: formData,
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        if (type === 'poster') {
+          setFormState((prev) => ({ ...prev, posterUrl: data.url }));
+          setUploadStatus((prev) => ({ ...prev, poster: `✓ Multer Upload: ${file.name}` }));
+        } else if (type === 'video') {
+          setFormState((prev) => ({ ...prev, videoUrl: data.url }));
+          setUploadStatus((prev) => ({ ...prev, video: `✓ Multer Upload: ${file.name}` }));
+        } else if (type === 'epVideo') {
+          setEpForm((prev) => ({ ...prev, videoUrl: data.url }));
+          setUploadStatus((prev) => ({ ...prev, epVideo: `✓ Multer Upload: ${file.name}` }));
+        }
+        notify(`Uploaded ${file.name} to server via Multer!`);
+      } else {
+        const localUrl = URL.createObjectURL(file);
+        if (type === 'poster') {
+          setFormState((prev) => ({ ...prev, posterUrl: localUrl }));
+          setUploadStatus((prev) => ({ ...prev, poster: `✓ Staged: ${file.name}` }));
+        } else if (type === 'video') {
+          setFormState((prev) => ({ ...prev, videoUrl: localUrl }));
+          setUploadStatus((prev) => ({ ...prev, video: `✓ Staged: ${file.name}` }));
+        } else if (type === 'epVideo') {
+          setEpForm((prev) => ({ ...prev, videoUrl: localUrl }));
+          setUploadStatus((prev) => ({ ...prev, epVideo: `✓ Staged: ${file.name}` }));
+        }
+        notify(`File ${file.name} staged successfully.`);
+      }
+    } catch {
+      const localUrl = URL.createObjectURL(file);
+      if (type === 'poster') {
+        setFormState((prev) => ({ ...prev, posterUrl: localUrl }));
+        setUploadStatus((prev) => ({ ...prev, poster: `✓ Staged: ${file.name}` }));
+      } else if (type === 'video') {
+        setFormState((prev) => ({ ...prev, videoUrl: localUrl }));
+        setUploadStatus((prev) => ({ ...prev, video: `✓ Staged: ${file.name}` }));
+      } else if (type === 'epVideo') {
+        setEpForm((prev) => ({ ...prev, videoUrl: localUrl }));
+        setUploadStatus((prev) => ({ ...prev, epVideo: `✓ Staged: ${file.name}` }));
+      }
+      notify(`File ${file.name} staged successfully.`);
+    }
   };
 
   const handleSaveTitle = (e) => {
@@ -297,27 +365,66 @@ const AdminDashboard = () => {
             </div>
 
             <div className="form-group">
-              <label>Poster Image URL (Cloudinary / CDN)</label>
-              <input
-                type="url"
-                placeholder="https://images.unsplash.com/..."
-                value={formState.posterUrl}
-                onChange={(e) =>
-                  setFormState({ ...formState, posterUrl: e.target.value })
-                }
-              />
+              <label>Poster Image (Multer Upload or Cloudinary URL)</label>
+              <div className="admin-upload-zone">
+                <input
+                  type="url"
+                  placeholder="https://images.unsplash.com/... or upload below"
+                  value={formState.posterUrl}
+                  onChange={(e) =>
+                    setFormState({ ...formState, posterUrl: e.target.value })
+                  }
+                />
+                <div className="upload-action-row">
+                  <label className="btn btn-outline btn-sm" style={{ cursor: 'pointer' }}>
+                    📁 Upload Poster via Multer
+                    <input
+                      type="file"
+                      accept="image/*"
+                      className="file-input-hidden"
+                      onChange={(e) => handleFileUpload(e.target.files?.[0], 'poster')}
+                    />
+                  </label>
+                  {uploadStatus.poster && (
+                    <span className="upload-feedback-badge">{uploadStatus.poster}</span>
+                  )}
+                  {formState.posterUrl && (
+                    <img
+                      src={formState.posterUrl}
+                      alt="Poster Preview"
+                      className="upload-preview-thumb"
+                    />
+                  )}
+                </div>
+              </div>
             </div>
 
             <div className="form-group">
-              <label>Video Stream URL (MP4 / Range Stream)</label>
-              <input
-                type="url"
-                placeholder="https://commondatastorage.googleapis.com/..."
-                value={formState.videoUrl}
-                onChange={(e) =>
-                  setFormState({ ...formState, videoUrl: e.target.value })
-                }
-              />
+              <label>Video Stream (Multer Video File or HTTP Range Stream URL)</label>
+              <div className="admin-upload-zone">
+                <input
+                  type="url"
+                  placeholder="https://commondatastorage.googleapis.com/... or upload below"
+                  value={formState.videoUrl}
+                  onChange={(e) =>
+                    setFormState({ ...formState, videoUrl: e.target.value })
+                  }
+                />
+                <div className="upload-action-row">
+                  <label className="btn btn-outline btn-sm" style={{ cursor: 'pointer' }}>
+                    🎬 Upload Video via Multer
+                    <input
+                      type="file"
+                      accept="video/mp4,video/webm"
+                      className="file-input-hidden"
+                      onChange={(e) => handleFileUpload(e.target.files?.[0], 'video')}
+                    />
+                  </label>
+                  {uploadStatus.video && (
+                    <span className="upload-feedback-badge">{uploadStatus.video}</span>
+                  )}
+                </div>
+              </div>
             </div>
 
             <div className="form-group">
@@ -511,6 +618,34 @@ const AdminDashboard = () => {
             </div>
 
             <div className="form-group">
+              <label>Episode Video Stream (Multer Upload or Range URL)</label>
+              <div className="admin-upload-zone">
+                <input
+                  type="url"
+                  placeholder="https://... or upload local episode file"
+                  value={epForm.videoUrl}
+                  onChange={(e) =>
+                    setEpForm({ ...epForm, videoUrl: e.target.value })
+                  }
+                />
+                <div className="upload-action-row">
+                  <label className="btn btn-outline btn-sm" style={{ cursor: 'pointer' }}>
+                    🎬 Upload Episode Video via Multer
+                    <input
+                      type="file"
+                      accept="video/mp4,video/webm"
+                      className="file-input-hidden"
+                      onChange={(e) => handleFileUpload(e.target.files?.[0], 'epVideo')}
+                    />
+                  </label>
+                  {uploadStatus.epVideo && (
+                    <span className="upload-feedback-badge">{uploadStatus.epVideo}</span>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            <div className="form-group">
               <label>Episode Synopsis</label>
               <textarea
                 rows={3}
@@ -526,6 +661,47 @@ const AdminDashboard = () => {
               Add Episode to Series
             </button>
           </form>
+
+          {episodeTargetId && (
+            <div className="episodes-manage-list">
+              <h4>
+                Existing Episodes in &ldquo;
+                {seriesList.find((s) => s.id === episodeTargetId)?.title}&rdquo; (
+                {seriesList.find((s) => s.id === episodeTargetId)?.episodes?.length || 0})
+              </h4>
+              {(
+                seriesList.find((s) => s.id === episodeTargetId)?.episodes || []
+              ).length === 0 ? (
+                <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>
+                  No episodes registered yet for this series.
+                </p>
+              ) : (
+                seriesList
+                  .find((s) => s.id === episodeTargetId)
+                  ?.episodes.map((ep) => (
+                    <div key={ep.id} className="ep-item-card">
+                      <div className="ep-item-meta">
+                        <strong>
+                          S{ep.seasonNumber}:E{ep.episodeNumber} — {ep.title}
+                        </strong>
+                        <span>{ep.duration} • {ep.synopsis}</span>
+                      </div>
+                      <button
+                        type="button"
+                        className="btn btn-outline btn-sm"
+                        style={{ color: 'var(--brand-red)', borderColor: 'var(--brand-red)' }}
+                        onClick={() => {
+                          deleteEpisodeFromSeries(episodeTargetId, ep.id);
+                          notify(`Removed episode "${ep.title}" from series.`);
+                        }}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  ))
+              )}
+            </div>
+          )}
         </div>
       )}
 
