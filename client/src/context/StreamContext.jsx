@@ -12,7 +12,28 @@ export const StreamProvider = ({ children }) => {
 
   const [titles, setTitles] = useState(() => {
     const saved = localStorage.getItem(STORAGE_TITLES_KEY);
-    return saved ? JSON.parse(saved) : INITIAL_TITLES;
+    if (!saved) return INITIAL_TITLES;
+    try {
+      if (saved.includes('commondatastorage.googleapis.com')) {
+        // Automatically sanitize broken legacy Google Cloud Storage sample URLs
+        const sanitized = saved
+          .replace(/https:\/\/commondatastorage\.googleapis\.com\/gtv-videos-bucket\/sample\/TearsOfSteel\.mp4/g, 'https://media.w3.org/2010/05/sintel/trailer.mp4')
+          .replace(/https:\/\/commondatastorage\.googleapis\.com\/gtv-videos-bucket\/sample\/BigBuckBunny\.mp4/g, 'https://media.w3.org/2010/05/bunny/trailer.mp4')
+          .replace(/https:\/\/commondatastorage\.googleapis\.com\/gtv-videos-bucket\/sample\/Sintel\.mp4/g, 'https://media.w3.org/2010/05/sintel/trailer.mp4')
+          .replace(/https:\/\/commondatastorage\.googleapis\.com\/gtv-videos-bucket\/sample\/ElephantsDream\.mp4/g, 'https://vjs.zencdn.net/v/oceans.mp4')
+          .replace(/https:\/\/commondatastorage\.googleapis\.com\/gtv-videos-bucket\/sample\/ForBiggerBlazes\.mp4/g, 'https://www.w3schools.com/html/mov_bbb.mp4')
+          .replace(/https:\/\/commondatastorage\.googleapis\.com\/gtv-videos-bucket\/sample\/ForBiggerEscapes\.mp4/g, 'https://media.w3.org/2010/05/sintel/trailer.mp4')
+          .replace(/https:\/\/commondatastorage\.googleapis\.com\/gtv-videos-bucket\/sample\/ForBiggerFun\.mp4/g, 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4')
+          .replace(/https:\/\/commondatastorage\.googleapis\.com\/gtv-videos-bucket\/sample\/ForBiggerJoyrides\.mp4/g, 'https://media.w3.org/2010/05/bunny/trailer.mp4')
+          .replace(/https:\/\/commondatastorage\.googleapis\.com\/gtv-videos-bucket\/sample\/ForBiggerMeltdowns\.mp4/g, 'https://www.w3schools.com/html/mov_bbb.mp4')
+          .replace(/https:\/\/commondatastorage\.googleapis\.com\/gtv-videos-bucket\/sample\/WeAreGoingOnBullrun\.mp4/g, 'https://vjs.zencdn.net/v/oceans.mp4')
+          .replace(/https:\/\/commondatastorage\.googleapis\.com\/gtv-videos-bucket\/sample\/[A-Za-z0-9_-]+\.mp4/g, 'https://media.w3.org/2010/05/sintel/trailer.mp4');
+        return JSON.parse(sanitized);
+      }
+      return JSON.parse(saved);
+    } catch {
+      return INITIAL_TITLES;
+    }
   });
 
   const [reviews, setReviews] = useState(() => {
@@ -117,10 +138,10 @@ export const StreamProvider = ({ children }) => {
         'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80',
       trailerUrl:
         payload.videoUrl ||
-        'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4',
+        'https://media.w3.org/2010/05/sintel/trailer.mp4',
       videoUrl:
         payload.videoUrl ||
-        'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4',
+        'https://media.w3.org/2010/05/sintel/trailer.mp4',
       featured: Boolean(payload.featured),
       trending: Boolean(payload.trending),
       newRelease: true,
@@ -182,7 +203,7 @@ export const StreamProvider = ({ children }) => {
           synopsis: episodeData.synopsis.trim(),
           videoUrl:
             episodeData.videoUrl ||
-            'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4',
+            'https://media.w3.org/2010/05/sintel/trailer.mp4',
         };
         return {
           ...t,

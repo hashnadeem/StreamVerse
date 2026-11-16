@@ -26,8 +26,8 @@ const SEED_TITLES = [
       'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80',
     backdropUrl:
       'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80',
-    trailerUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4',
-    videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4',
+    trailerUrl: 'https://media.w3.org/2010/05/sintel/trailer.mp4',
+    videoUrl: 'https://media.w3.org/2010/05/sintel/trailer.mp4',
     featured: true,
     trending: true,
     newRelease: true,
@@ -43,7 +43,7 @@ const SEED_TITLES = [
         synopsis:
           'Dr. Elena Vance intercepts an encrypted telemetry packet originating from her own orbital station—dated two days in the future.',
         videoUrl:
-          'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4',
+          'https://media.w3.org/2010/05/sintel/trailer.mp4',
       },
       {
         episodeNumber: 2,
@@ -53,7 +53,7 @@ const SEED_TITLES = [
         synopsis:
           'As power grids flicker across three continents, Marcus uncovers a covert syndicate manipulating temporal market data.',
         videoUrl:
-          'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
+          'https://vjs.zencdn.net/v/oceans.mp4',
       },
       {
         episodeNumber: 3,
@@ -63,7 +63,7 @@ const SEED_TITLES = [
         synopsis:
           'The crew executes an unauthorized spacewalk to recalibrate the relay before the predicted solar storm hits.',
         videoUrl:
-          'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
+          'https://www.w3schools.com/html/mov_bbb.mp4',
       },
     ],
   },
@@ -83,8 +83,8 @@ const SEED_TITLES = [
       'https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=800&q=80',
     backdropUrl:
       'https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1600&q=80',
-    trailerUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-    videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+    trailerUrl: 'https://media.w3.org/2010/05/bunny/trailer.mp4',
+    videoUrl: 'https://media.w3.org/2010/05/bunny/trailer.mp4',
     featured: false,
     trending: true,
     newRelease: true,
@@ -109,8 +109,8 @@ const SEED_TITLES = [
       'https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=800&q=80',
     backdropUrl:
       'https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=1600&q=80',
-    trailerUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-    videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+    trailerUrl: 'https://media.w3.org/2010/05/bunny/trailer.mp4',
+    videoUrl: 'https://media.w3.org/2010/05/bunny/trailer.mp4',
     featured: false,
     trending: false,
     newRelease: true,
@@ -135,8 +135,8 @@ const SEED_TITLES = [
       'https://images.unsplash.com/photo-1508739773434-c26b3d09e071?auto=format&fit=crop&w=800&q=80',
     backdropUrl:
       'https://images.unsplash.com/photo-1514565131-fce0801e5785?auto=format&fit=crop&w=1600&q=80',
-    trailerUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4',
-    videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4',
+    trailerUrl: 'https://media.w3.org/2010/05/sintel/trailer.mp4',
+    videoUrl: 'https://media.w3.org/2010/05/sintel/trailer.mp4',
     featured: false,
     trending: true,
     newRelease: false,
@@ -151,7 +151,7 @@ const SEED_TITLES = [
         duration: '48m',
         synopsis: 'A routine memory extraction job goes sideways in the rain-soaked alleys.',
         videoUrl:
-          'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4',
+          'https://media.w3.org/2010/05/sintel/trailer.mp4',
       },
     ],
   },

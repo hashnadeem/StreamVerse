@@ -16,8 +16,8 @@ export const INITIAL_TITLES = [
       'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80',
     backdropUrl:
       'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80',
-    trailerUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4',
-    videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4',
+    trailerUrl: 'https://media.w3.org/2010/05/sintel/trailer.mp4',
+    videoUrl: 'https://media.w3.org/2010/05/sintel/trailer.mp4',
     featured: true,
     trending: true,
     newRelease: true,
@@ -34,7 +34,7 @@ export const INITIAL_TITLES = [
         synopsis:
           'Dr. Elena Vance intercepts an encrypted telemetry packet originating from her own orbital station—dated two days in the future.',
         videoUrl:
-          'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4',
+          'https://media.w3.org/2010/05/sintel/trailer.mp4',
       },
       {
         id: 'ep-101-2',
@@ -45,7 +45,7 @@ export const INITIAL_TITLES = [
         synopsis:
           'As power grids flicker across three continents, Marcus uncovers a covert syndicate manipulating temporal market data.',
         videoUrl:
-          'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
+          'https://vjs.zencdn.net/v/oceans.mp4',
       },
       {
         id: 'ep-101-3',
@@ -56,7 +56,7 @@ export const INITIAL_TITLES = [
         synopsis:
           'The crew executes an unauthorized spacewalk to recalibrate the relay before the predicted solar storm hits.',
         videoUrl:
-          'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
+          'https://www.w3schools.com/html/mov_bbb.mp4',
       },
       {
         id: 'ep-101-4',
@@ -67,7 +67,7 @@ export const INITIAL_TITLES = [
         synopsis:
           'Six months after the orbital shutdown, a second anomaly emerges deep beneath theKarakoram mountain range.',
         videoUrl:
-          'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4',
+          'https://media.w3.org/2010/05/sintel/trailer.mp4',
       },
     ],
   },
@@ -89,9 +89,9 @@ export const INITIAL_TITLES = [
     backdropUrl:
       'https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?auto=format&fit=crop&w=1600&q=80',
     trailerUrl:
-      'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4',
+      'https://media.w3.org/2010/05/sintel/trailer.mp4',
     videoUrl:
-      'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4',
+      'https://media.w3.org/2010/05/sintel/trailer.mp4',
     featured: false,
     trending: true,
     newRelease: true,
@@ -117,8 +117,8 @@ export const INITIAL_TITLES = [
       'https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=800&q=80',
     backdropUrl:
       'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1600&q=80',
-    trailerUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4',
-    videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4',
+    trailerUrl: 'https://media.w3.org/2010/05/sintel/trailer.mp4',
+    videoUrl: 'https://media.w3.org/2010/05/sintel/trailer.mp4',
     featured: false,
     trending: true,
     newRelease: false,
@@ -134,7 +134,7 @@ export const INITIAL_TITLES = [
         duration: '24m',
         synopsis:
           'Toby and Maya test their mechanical glider during the annual Cloudburst Festival.',
-        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4',
+        videoUrl: 'https://media.w3.org/2010/05/sintel/trailer.mp4',
       },
       {
         id: 'ep-103-2',
@@ -145,7 +145,7 @@ export const INITIAL_TITLES = [
         synopsis:
           'An ancient map inside the academy library points toward the lost island of Zephyr.',
         videoUrl:
-          'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+          'https://media.w3.org/2010/05/bunny/trailer.mp4',
       },
     ],
   },
@@ -167,9 +167,9 @@ export const INITIAL_TITLES = [
     backdropUrl:
       'https://images.unsplash.com/photo-1511497584788-876760111969?auto=format&fit=crop&w=1600&q=80',
     trailerUrl:
-      'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+      'https://media.w3.org/2010/05/bunny/trailer.mp4',
     videoUrl:
-      'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+      'https://media.w3.org/2010/05/bunny/trailer.mp4',
     featured: false,
     trending: false,
     newRelease: false,
@@ -196,9 +196,9 @@ export const INITIAL_TITLES = [
     backdropUrl:
       'https://images.unsplash.com/photo-1514565131-fce0801e5785?auto=format&fit=crop&w=1600&q=80',
     trailerUrl:
-      'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4',
+      'https://media.w3.org/2010/05/bunny/trailer.mp4',
     videoUrl:
-      'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4',
+      'https://media.w3.org/2010/05/bunny/trailer.mp4',
     featured: false,
     trending: true,
     newRelease: true,
@@ -225,9 +225,9 @@ export const INITIAL_TITLES = [
     backdropUrl:
       'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1600&q=80',
     trailerUrl:
-      'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4',
+      'https://www.w3schools.com/html/mov_bbb.mp4',
     videoUrl:
-      'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4',
+      'https://www.w3schools.com/html/mov_bbb.mp4',
     featured: false,
     trending: false,
     newRelease: true,
@@ -244,7 +244,7 @@ export const INITIAL_TITLES = [
         synopsis:
           'Exploring slow-simmered spice blends and clay-oven artisan breads in historic food streets.',
         videoUrl:
-          'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4',
+          'https://www.w3schools.com/html/mov_bbb.mp4',
       },
       {
         id: 'ep-106-2',
@@ -255,7 +255,7 @@ export const INITIAL_TITLES = [
         synopsis:
           'Coastal fishermen and spice merchants share the craft behind Bosphorus seafood feasts.',
         videoUrl:
-          'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
+          'https://www.w3schools.com/html/mov_bbb.mp4',
       },
     ],
   },
@@ -277,9 +277,9 @@ export const INITIAL_TITLES = [
     backdropUrl:
       'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1600&q=80',
     trailerUrl:
-      'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
+      'https://vjs.zencdn.net/v/oceans.mp4',
     videoUrl:
-      'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
+      'https://vjs.zencdn.net/v/oceans.mp4',
     featured: false,
     trending: false,
     newRelease: false,
@@ -306,9 +306,9 @@ export const INITIAL_TITLES = [
     backdropUrl:
       'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80',
     trailerUrl:
-      'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4',
+      'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4',
     videoUrl:
-      'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4',
+      'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4',
     featured: false,
     trending: true,
     newRelease: false,
@@ -335,9 +335,9 @@ export const INITIAL_TITLES = [
     backdropUrl:
       'https://images.unsplash.com/photo-1586165368502-1bad197a6461?auto=format&fit=crop&w=1600&q=80',
     trailerUrl:
-      'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4',
+      'https://vjs.zencdn.net/v/oceans.mp4',
     videoUrl:
-      'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4',
+      'https://vjs.zencdn.net/v/oceans.mp4',
     featured: false,
     trending: false,
     newRelease: true,
@@ -354,7 +354,7 @@ export const INITIAL_TITLES = [
         synopsis:
           'Anya arrives in Vienna unseeded and faces defending champion Grandmaster Sokolov in the opening round.',
         videoUrl:
-          'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4',
+          'https://vjs.zencdn.net/v/oceans.mp4',
       },
       {
         id: 'ep-109-2',
@@ -365,7 +365,7 @@ export const INITIAL_TITLES = [
         synopsis:
           'A mysterious notebook left in Anya’s hotel room reveals annotated games from 1974.',
         videoUrl:
-          'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4',
+          'https://media.w3.org/2010/05/sintel/trailer.mp4',
       },
     ],
   },
