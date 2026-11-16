@@ -209,10 +209,16 @@ const TitleDetailsPage = () => {
               </button>
             </div>
             <video
-              src={item.trailerUrl || item.videoUrl}
+              src={item.trailerUrl || item.videoUrl || '/sample-video.mp4'}
               controls
               autoPlay
               className="trailer-video-element"
+              onError={(e) => {
+                if (e.target.src !== window.location.origin + '/sample-video.mp4') {
+                  e.target.src = '/sample-video.mp4';
+                  e.target.play().catch(() => {});
+                }
+              }}
             />
           </div>
         </div>

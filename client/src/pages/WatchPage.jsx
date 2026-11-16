@@ -39,13 +39,22 @@ const WatchPage = () => {
   const [muted, setMuted] = useState(false);
   const [playbackRate, setPlaybackRate] = useState(1);
   const [showEpisodeDrawer, setShowEpisodeDrawer] = useState(false);
-  const [streamMode, setStreamMode] = useState('range'); // 'range' | 'cdn'
+  const [streamMode, setStreamMode] = useState('cdn'); // default to 'cdn' for instant zero-dependency playback
+  const [fallbackUrl, setFallbackUrl] = useState(null);
+  const [videoError, setVideoError] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (item) {
       incrementViews(item.id);
     }
   }, [id]);
+
+  useEffect(() => {
+    setFallbackUrl(null);
+    setVideoError(false);
+    setLoading(true);
+  }, [id, activeEpisode?.id]);
 
   // Restore saved progress for this profile & title
   useEffect(() => {
@@ -76,15 +85,29 @@ const WatchPage = () => {
 
   const rawSource = activeEpisode ? activeEpisode.videoUrl : item.videoUrl;
   const streamSource =
-    streamMode === 'range' && rawSource
+    fallbackUrl ||
+    (streamMode === 'range' && rawSource
       ? `/api/catalog/stream?videoPath=${encodeURIComponent(rawSource)}`
-      : rawSource;
+      : rawSource || '/sample-video.mp4');
 
   const togglePlay = () => {
     if (!videoRef.current) return;
     if (videoRef.current.paused) {
-      videoRef.current.play();
-      setIsPlaying(true);
+      const playPromise = videoRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            setIsPlaying(true);
+            setVideoError(false);
+          })
+          .catch((err) => {
+            console.warn('Playback play() caught error:', err);
+            if (!fallbackUrl) {
+              setFallbackUrl('/sample-video.mp4');
+              setStreamMode('cdn');
+            }
+          });
+      }
     } else {
       videoRef.current.pause();
       setIsPlaying(false);
@@ -218,18 +241,64 @@ const WatchPage = () => {
       <div className="player-stage" onClick={togglePlay}>
         <video
           ref={videoRef}
+          key={streamSource}
           src={streamSource}
           className="html5-video-canvas"
-          onLoadedMetadata={() =>
-            setDuration(videoRef.current?.duration || 0)
-          }
+          onLoadedMetadata={() => {
+            setDuration(videoRef.current?.duration || 0);
+            setLoading(false);
+          }}
+          onWaiting={() => setLoading(true)}
+          onPlaying={() => {
+            setLoading(false);
+            setIsPlaying(true);
+            setVideoError(false);
+          }}
+          onCanPlay={() => setLoading(false)}
+          onError={() => {
+            console.warn('Video failed to load from:', streamSource);
+            if (!fallbackUrl) {
+              setFallbackUrl('/sample-video.mp4');
+              setStreamMode('cdn');
+            } else {
+              setVideoError(true);
+              setLoading(false);
+            }
+          }}
           onTimeUpdate={handleTimeUpdate}
           onPlay={() => setIsPlaying(true)}
           onPause={() => setIsPlaying(false)}
           playsInline
         />
 
-        {!isPlaying && (
+        {loading && !videoError && <div className="player-buffering-spinner" />}
+
+        {videoError && (
+          <div
+            className="player-error-overlay"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <p style={{ margin: 0, fontWeight: 600 }}>⚠️ Video stream could not be loaded directly.</p>
+            <button
+              type="button"
+              className="btn btn-primary btn-sm"
+              onClick={() => {
+                setFallbackUrl('/sample-video.mp4');
+                setStreamMode('cdn');
+                setVideoError(false);
+                if (videoRef.current) {
+                  videoRef.current.src = '/sample-video.mp4';
+                  videoRef.current.load();
+                  videoRef.current.play();
+                }
+              }}
+            >
+              ▶ Play Bundled Local Stream
+            </button>
+          </div>
+        )}
+
+        {!isPlaying && !loading && (
           <button
             type="button"
             className="center-big-play"
